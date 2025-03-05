@@ -1,12 +1,11 @@
 import numpy as np
 # Определяем функцию Phi(x, y)
 def phi(x, y):
-    return (np.sin(x) - y)**2 + (x**2 + y**2 - 4)**2
+    return (np.cos(x - 1) + y - 0.5) ** 2 + (x - np.cos(y) - 3) ** 2
 
-# Определяем градиент функции Phi(x, y)
 def grad_phi(x, y):
-    df_dx = 2 * (np.sin(x) - y) * np.cos(x) + 4 * x * (x**2 + y**2 - 4)
-    df_dy = -2 * (np.sin(x) - y) + 4 * y * (x**2 + y**2 - 4)
+    df_dx = -2 * (np.cos(x - 1) + y - 0.5) * np.sin(x - 1) + 2 * (x - np.cos(y))
+    df_dy = 2 * (np.cos(x - 1) + y - 0.5) - 2 * (x - np.cos(y)) * np.sin(y)
     return np.array([df_dx, df_dy])
 # Метод скорейшего спуска
 def steepest_descent(x0, y0, tol=1e-6, max_iter=1000):
